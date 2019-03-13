@@ -10,26 +10,8 @@ debian_ldflags:=$(shell dpkg-buildflags --get LDFLAGS)
 DEBIAN_NGINX_PERL_LDFLAGS:= $(shell DEB_BUILD_MAINT_OPTIONS=hardening=+all dpkg-buildflags --get LDFLAGS)
 export DEBIAN_NGINX_PERL_LDFLAGS
 
-FLAVOURS := full light extras
-DYN_MODS := \
-	http-auth-pam \
-	http-cache-purge \
-	http-dav-ext \
-	http-echo \
-	http-fancyindex \
-	http-geoip \
-	http-headers-more-filter \
-	http-image-filter \
-	http-lua \
-	http-ndk \
-	http-perl \
-	http-subs-filter \
-	http-uploadprogress \
-	http-upstream-fair \
-	http-xslt-filter \
-	mail \
-	nchan \
-	stream
+FLAVOURS :=
+DYN_MODS := http-status
 
 MODULESDIR = $(CURDIR)/debian/modules
 BASEDIR = $(CURDIR)
@@ -106,7 +88,8 @@ full_configure_flags := \
 			--add-dynamic-module=$(MODULESDIR)/nginx-dav-ext-module \
 			--add-dynamic-module=$(MODULESDIR)/nginx-echo \
 			--add-dynamic-module=$(MODULESDIR)/nginx-upstream-fair \
-			--add-dynamic-module=$(MODULESDIR)/ngx_http_substitutions_filter_module
+			--add-dynamic-module=$(MODULESDIR)/ngx_http_substitutions_filter_module \
+			--add-dynamic-module=$(MODULESDIR)/nginx-http-status
 
 extras_configure_flags := \
 			$(common_configure_flags) \
@@ -158,8 +141,8 @@ override_dh_installinit:
 override_dh_systemd_enable:
 	dh_systemd_enable --name=nginx
 
-override_dh_installlogrotate:
-	dh_installlogrotate --package nginx-common --name=nginx
+#override_dh_installlogrotate:
+#	dh_installlogrotate --package nginx-common --name=nginx
 
 build.arch.%:
 	$(MAKE) -C $(BUILDDIR_$*) build

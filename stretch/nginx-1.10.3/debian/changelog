@@ -1,3 +1,9 @@
+libnginx-http-status (1.10.3-1) stretch; urgency=high
+
+  * status-nginx-module for nginx
+
+ -- Tomas Ebenlendr <tomas.ebenlendr@centrumholdings.com>  Wed, 13 Mar 2019 14:35:42 +0100
+
 nginx (1.10.3-1+deb9u2) stretch-security; urgency=high
 
   * Backport http2_max_requests directive needed for
