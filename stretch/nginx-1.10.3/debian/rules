@@ -10,7 +10,8 @@ debian_ldflags:=$(shell dpkg-buildflags --get LDFLAGS)
 DEBIAN_NGINX_PERL_LDFLAGS:= $(shell DEB_BUILD_MAINT_OPTIONS=hardening=+all dpkg-buildflags --get LDFLAGS)
 export DEBIAN_NGINX_PERL_LDFLAGS
 
-FLAVOURS :=
+FLAVOURS := extras
+INSTALL_FLAVOURS :=
 DYN_MODS := http-status
 
 MODULESDIR = $(CURDIR)/debian/modules
@@ -88,8 +89,7 @@ full_configure_flags := \
 			--add-dynamic-module=$(MODULESDIR)/nginx-dav-ext-module \
 			--add-dynamic-module=$(MODULESDIR)/nginx-echo \
 			--add-dynamic-module=$(MODULESDIR)/nginx-upstream-fair \
-			--add-dynamic-module=$(MODULESDIR)/ngx_http_substitutions_filter_module \
-			--add-dynamic-module=$(MODULESDIR)/nginx-http-status
+			--add-dynamic-module=$(MODULESDIR)/ngx_http_substitutions_filter_module
 
 extras_configure_flags := \
 			$(common_configure_flags) \
@@ -120,6 +120,7 @@ extras_configure_flags := \
 			--add-dynamic-module=$(MODULESDIR)/nginx-lua \
 			--add-dynamic-module=$(MODULESDIR)/nginx-upload-progress \
 			--add-dynamic-module=$(MODULESDIR)/nginx-upstream-fair \
+			--add-dynamic-module=$(MODULESDIR)/nginx-http-status \
 			--add-dynamic-module=$(MODULESDIR)/ngx_http_substitutions_filter_module
 
 %:
@@ -127,7 +128,7 @@ extras_configure_flags := \
 
 override_dh_auto_configure: config_patch_modules $(foreach flavour,$(FLAVOURS),config.arch.$(flavour))
 override_dh_auto_build:     $(foreach flavour,$(FLAVOURS),build.arch.$(flavour))
-override_dh_strip:          $(foreach flavour,$(FLAVOURS),strip.arch.$(flavour)) $(foreach mod,$(DYN_MODS),strip.mods.$(mod))
+override_dh_strip:          $(foreach flavour,$(INSTALL_FLAVOURS),strip.arch.$(flavour)) $(foreach mod,$(DYN_MODS),strip.mods.$(mod))
 override_dh_clean:          clean_patch_modules $(foreach flavour,$(FLAVOURS),clean.$(flavour))
 	dh_clean
 

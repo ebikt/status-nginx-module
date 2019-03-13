@@ -30,7 +30,7 @@ Vcs-Browser: https://git.isrv.cz/itops/libnginx-http-status
 
 Package: libnginx-mod-http-status
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, nginx-common (>= 1.10.3-0), nginx-common (<< 1.10.3+~)
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Zoned status for NGINX
  This module provides statistics about served connections
  including upstream statistics, and may be splitted into zones.
