@@ -179,4 +179,7 @@ config.arch.%:
 clean.%:
 	rm -rf $(BUILDDIR_$*)
 
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
+
 .PHONY: config_patch_modules clean_patch_modules
