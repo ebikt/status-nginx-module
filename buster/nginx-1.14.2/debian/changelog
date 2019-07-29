@@ -1,4 +1,4 @@
-libnginx-http-status (1.14.2-1) stretch; urgency=high
+libnginx-http-status (1.14.2-2) stretch; urgency=high
 
   * status-nginx-module for nginx
 
