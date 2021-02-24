@@ -1,8 +1,23 @@
-libnginx-http-status (1.14.2-2+deb10u1) stretch; urgency=high
+libnginx-http-status (1.14.2-2+deb10u3) stretch; urgency=high
 
   * status-nginx-module for nginx
 
  -- Tomas Ebenlendr <tomas.ebenlendr@centrumholdings.com>  Wed, 16 Oct 2019 18:44:21 +0200
+
+nginx (1.14.2-2+deb10u3) buster-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * bugfix: prevented request smuggling in the ngx.location.capture API
+    (CVE-2020-11724) (Closes: #964950)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Aug 2020 12:18:43 +0200
+
+nginx (1.14.2-2+deb10u2) buster; urgency=medium
+
+  * Handle CVE-2019-20372, error page request smuggling
+    (Closes: #948579)
+
+ -- Christos Trochalakis <ctrochalakis@debian.org>  Sat, 11 Jan 2020 09:28:05 +0200
 
 nginx (1.14.2-2+deb10u1) buster-security; urgency=high
 
@@ -2327,4 +2342,3 @@ nginx (0.4.2-1) unstable; urgency=low
   * Tweaked the configuration file and the path handling for Debian.
 
  -- Jose Parrella <joseparrella@cantv.net>  Thu, 14 Sep 2006 11:40:20 -0400
-
